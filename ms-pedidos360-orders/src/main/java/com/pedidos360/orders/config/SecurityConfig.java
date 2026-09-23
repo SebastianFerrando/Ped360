@@ -2,6 +2,7 @@ package com.pedidos360.orders.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,6 +31,10 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
+                // Los preflight OPTIONS del navegador (CORS) nunca llevan token —
+                // hay que dejarlos pasar explícitamente, o Spring Security los
+                // bloquea igual que cualquier otra request sin Authorization.
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers("/api/publico/**").permitAll()
                 // El detalle fino de permisos por rol se aplica con @PreAuthorize
                 // en cada método de controller (ver PedidoController / ProductoController).
