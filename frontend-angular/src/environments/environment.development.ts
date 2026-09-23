@@ -2,8 +2,8 @@
 // Apunta a los dos microservicios corriendo en localhost.
 export const environment = {
   production: false,
-  ordersApiUrl: 'http://localhost:8080/api',
-  catalogApiUrl: 'http://localhost:8081/api',
+  ordersApiUrl: 'https://o2d0br883c.execute-api.us-east-1.amazonaws.com/orders-api/api',
+  catalogApiUrl: 'https://o2d0br883c.execute-api.us-east-1.amazonaws.com/catalog-api/api',
   azure: {
     clientId: 'd383250f-c257-4aa9-8203-f395b0ea0ab2',
     tenantId: '76d549dd-1b81-4a0d-97d5-09040b6180c4',
